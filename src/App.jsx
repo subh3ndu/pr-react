@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [input, setInput] = useState("");
-  const [arr, setArr] = useState([]);
+  const [arr, setArr] = useState(JSON.parse(localStorage.getItem('names')) || []);
+
+  useEffect(() => {
+    localStorage.setItem('names', JSON.stringify(arr))
+  }, [arr]); 
 
   const handleChange = (e) => {
     setInput(e.target.value)
